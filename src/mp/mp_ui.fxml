@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<BorderPane fx:controller="mp.ControllerMP" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <VBox alignment="CENTER">
+            <Text text="MONEY"/>
+            <HBox fx:id="playerCards"/>
+        </VBox>
+    </center>
+    <right>
+        <VBox alignment="CENTER">
+            <Button text="Call" onAction="#handleButton" focusTraversable="false"/>
+            <Button text="Raise" onAction="#handleButton" focusTraversable="false"/>
+            <Button text="Fold" onAction="#handleButton" focusTraversable="false"/>
+        </VBox>
+    </right>
+</BorderPane>
