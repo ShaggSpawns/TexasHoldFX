@@ -23,7 +23,3 @@ public class GameRunner extends Application {
 		primaryStage.show();
 	}
 }
-/*
-
-
- */
