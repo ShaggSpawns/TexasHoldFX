@@ -20,42 +20,53 @@ public class CardImageView extends Parent {
 	private ImageView cardView;
 	private ImageView cardBack;
 
+	private double scale;
+
 	private String cardInfo;
 
 	public CardImageView(Card card) {
-		this(card.getRank(), card.getSuit(), 1, true);
+		this(card.getRank(), card.getSuit(), 1, true, 1);
 	}
 
 	public CardImageView(Card card, boolean isShowing) {
-		this(card.getRank(), card.getSuit(), 1, isShowing);
+		this(card.getRank(), card.getSuit(), 1, isShowing, 1);
 	}
 
 	public CardImageView(Card card, double scale) {
-		this(card.getRank(), card.getSuit(), scale, true);
+		this(card.getRank(), card.getSuit(), scale, true, 1);
 	}
 
 	public CardImageView(Card card, double scale, boolean isShowing) {
-		this(card.getRank(), card.getSuit(), scale, isShowing);
+		this(card.getRank(), card.getSuit(), scale, isShowing, 1);
 	}
 
-	public CardImageView(Rank rank, Suit suit, double scale, boolean isShowing) {
+	public CardImageView(Card card, double scale, boolean isShowing, double crop) {
+		this(card.getRank(), card.getSuit(), scale, isShowing, crop);
+	}
+
+	public CardImageView(Rank rank, Suit suit, double scale, boolean isShowing, double cropAmount) {
+		if (cropAmount > 1 || cropAmount < 0)
+			throw new IllegalArgumentException("Crop is between 1 and 0");
 		cardInfo = rank.name() + " " + suit.name();
+		this.scale = scale;
 		int x = WIDTH * (rank.getValue() - 1);
 		int y = HEIGHT * suit.getValue();
 
 		cardView = new ImageView(cards);
-		Rectangle2D cropped = new Rectangle2D(x, y, WIDTH, HEIGHT);
+		Rectangle2D cropped = new Rectangle2D(x, y, WIDTH, HEIGHT * cropAmount);
 		cardView.setViewport(cropped);
 		cardView.setPreserveRatio(true);
 		cardView.setSmooth(true);
 		cardView.setFitWidth(WIDTH * scale);
-		cardView.setFitHeight(HEIGHT * scale);
+		cardView.setFitHeight(HEIGHT * scale * cropAmount);
 
 		cardBack = new ImageView(cardBackTemplate);
+		Rectangle2D cropped2 = new Rectangle2D(0, 0, WIDTH, HEIGHT * cropAmount);
+		cardBack.setViewport(cropped2);
 		cardBack.setPreserveRatio(true);
 		cardBack.setSmooth(true);
 		cardBack.setFitWidth(WIDTH * scale);
-		cardBack.setFitHeight(HEIGHT * scale);
+		cardBack.setFitHeight(HEIGHT * scale * cropAmount);
 
 		this.isShowing = isShowing;
 

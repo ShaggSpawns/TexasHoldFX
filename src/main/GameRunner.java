@@ -16,10 +16,14 @@ public class GameRunner extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
 		Parent root = FXMLLoader.load(getClass().getResource("game_ui.fxml"));
-		Scene scene = new Scene(root, 1280, 820);
+		Scene scene = new Scene(root, 860, 610);
 		primaryStage.setTitle("Texas Hold'em");
 		primaryStage.setScene(scene);
 		primaryStage.getIcons().add(new Image("file:icon.png"));
 		primaryStage.show();
 	}
 }
+/*
+
+
+ */

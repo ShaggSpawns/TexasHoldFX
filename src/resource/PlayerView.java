@@ -23,13 +23,14 @@ public class PlayerView extends StackPane {
 	public PlayerView(Player player) {
 		this.player = player;
 		setAlignment(Pos.CENTER);
-		Rectangle backgroundEdge = new Rectangle(191, 101);
+		Rectangle backgroundEdge = new Rectangle(191, 71);
 		backgroundEdge.setArcWidth(10);
 		backgroundEdge.setArcHeight(10);
 		backgroundEdge.setFill(Color.CADETBLUE);
 		getChildren().add(backgroundEdge);
 
-		Rectangle background = new Rectangle(185,95);
+		Rectangle background = new Rectangle(185,66);
+		background.setStroke(Color.BLACK);
 		background.setArcWidth(10);
 		background.setArcHeight(10);
 		background.setFill(Color.LIGHTBLUE);
@@ -47,7 +48,7 @@ public class PlayerView extends StackPane {
 
 		cardViews = new HBox(3);
 		for (Card c: player.getCards())
-			cardViews.getChildren().add(new CardImageView(c, .52, false));
+			cardViews.getChildren().add(new CardImageView(c, .52, false, .6));
 
 		StackPane statusPane = new StackPane();
 		statusBackground = new Rectangle(65, 20);

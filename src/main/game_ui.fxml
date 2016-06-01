@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.control.ButtonBar?>
 <BorderPane fx:controller="main.ControllerGame" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <right>
         <VBox style="-fx-background-color: lightgray" fx:id="playerListView" alignment="BASELINE_CENTER" spacing="10" prefWidth="200.0">
@@ -18,40 +19,54 @@
     </right>
 
     <center>
-        <VBox spacing="200" alignment="BOTTOM_CENTER" style="-fx-background-color: darkgreen">
-            <Text text="Pot: $" onMouseClicked="#handleButton">
-                <font>
-                    <Font name="" style="ITALIC" size="62"/>
-                </font>
-            </Text>
-            <StackPane alignment="CENTER">
-                <Rectangle fill="papayawhip" stroke="black" width="465" height="150" arcWidth="25" arcHeight="25"/>
-                <HBox fx:id="boardCards" alignment="CENTER" spacing="10" prefHeight="79"/>
-            </StackPane>
-            <BorderPane>
-                <padding>
-                    <Insets bottom="40.0" left="0.0" right ="40.0" top="0.0"/>
-                </padding>
-                <right>
-                    <VBox spacing="10">
+        <BorderPane>
+            <top>
+                <StackPane alignment="CENTER">
+                    <padding>
+                        <Insets bottom="0.0" left="0.0" right ="0.0" top="40.0"/>
+                    </padding>
+                    <Text  text="Pot: $" onMouseClicked="#handleButton">
+                        <font>
+                            <Font name="" style="ITALIC" size="62"/>
+                        </font>
+                    </Text>
+                </StackPane>
+            </top>
+            <center>
+                <StackPane alignment="CENTER">
+                    <Rectangle fill="papayawhip" stroke="black" width="465" height="150" arcWidth="25" arcHeight="25"/>
+                    <HBox fx:id="boardCards" alignment="CENTER" spacing="10" prefHeight="79"/>
+                </StackPane>
+            </center>
+            <bottom>
+                <BorderPane>
+                    <padding>
+                        <Insets bottom="20.0" left="0.0" right ="40.0" top="0.0"/>
+                    </padding>
+                    <right>
                         <StackPane alignment="CENTER">
-                            <Rectangle fill="papayawhip" width="100" height="80"/>
-                            <Text text="MONEY"/>
+                            <Rectangle translateX="30" fill="papayawhip" stroke="black" width="270" height="150" arcWidth="25" arcHeight="25"/>
+                            <VBox alignment="CENTER" spacing="10">
+                                <Text text="MONEY"/>
+                                <ButtonBar translateX="-27" prefWidth="360">
+                                    <buttons>
+                                        <Button text="Call" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
+                                        <Button text="Raise" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
+                                        <Button text="Fold" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
+                                    </buttons>
+                                </ButtonBar>
+                            </VBox>
                         </StackPane>
-                        <HBox spacing="10">
-                            <Button text="Call" onAction="#handleButton" focusTraversable="false"/>
-                            <Button text="Raise" onAction="#handleButton" focusTraversable="false"/>
-                            <Button text="Fold" onAction="#handleButton" focusTraversable="false"/>
-                        </HBox>
-                    </VBox>
-                </right>
-                <center>
-                    <StackPane alignment="CENTER" translateX="87">
-                        <Rectangle fill="papayawhip" stroke="black" width="200" height="150" arcWidth="25" arcHeight="25"/>
-                        <HBox alignment="CENTER" fx:id="playerCards" spacing="10" prefHeight="79"/>
-                    </StackPane>
-                </center>
-            </BorderPane>
-        </VBox>
+                    </right>
+                    <center>
+                        <StackPane alignment="CENTER" translateX="87">
+
+                            <Rectangle fill="papayawhip" stroke="black" width="200" height="150" arcWidth="25" arcHeight="25"/>
+                            <HBox alignment="CENTER" fx:id="playerCards" spacing="10" prefHeight="79"/>
+                        </StackPane>
+                    </center>
+                </BorderPane>
+            </bottom>
+        </BorderPane>
     </center>
 </BorderPane>
