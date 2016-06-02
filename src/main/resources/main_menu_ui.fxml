@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane fx:controller="main.controllers.ControllerMainMenu" prefWidth="860" prefHeight="610" style="-fx-background-color: lightgray" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <StackPane prefHeight="220" alignment="BOTTOM_CENTER">
+            <Text text="Texas Hold'em" fill="midnightblue">
+                <font>
+                    <Font size="100" style="BOLD" name="Times New Roman"/>
+                </font>
+            </Text>
+        </StackPane>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <StackPane alignment="CENTER" prefHeight="40">
+                <Text text="Singleplayer" fx:id="spBtn" onMouseEntered="#handleEnter" onMouseExited="#handleExit" onMousePressed="#handleClick"/>
+            </StackPane>
+            <StackPane alignment="CENTER" prefHeight="40">
+                <Text text="Multiplayer" fx:id="mpBtn" onMouseEntered="#handleEnter" onMouseExited="#handleExit" onMousePressed="#handleClick"/>
+            </StackPane>
+            <StackPane alignment="CENTER" prefHeight="40">
+                <Text text="Options" fx:id="optionBtn" onMouseEntered="#handleEnter" onMouseExited="#handleExit" onMousePressed="#handleClick"/>
+            </StackPane>
+            <StackPane alignment="CENTER" prefHeight="40">
+                <Text text="Exit" fx:id="exitBtn" onMouseEntered="#handleEnter" onMouseExited="#handleExit" onMousePressed="#handleClick"/>
+            </StackPane>
+        </VBox>
+    </center>
+    <bottom>
+
+    </bottom>
+</BorderPane>

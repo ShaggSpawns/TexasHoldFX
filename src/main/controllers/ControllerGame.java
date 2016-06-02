@@ -1,19 +1,18 @@
-package main;
+package main.controllers;
 
 import game.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import main.runners.TexasHoldFX;
 import resource.CardImageView;
 import resource.PlayerView;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ControllerGame implements Initializable {
@@ -26,53 +25,27 @@ public class ControllerGame implements Initializable {
 
 	int index = 2;
 
+	private List<Player> playerList = TexasHoldFX.game.getPlayers();
+
+	public static GameMode mode = GameMode.SINGLEPLAYER;
+
+    public void setPlayerList(List<Player> players) {
+        if (players.size() > 8 || players.size() < 2)
+            throw new IllegalArgumentException("Invalid number of players");
+        this.playerList = players;
+    }
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Random r = new Random(2);
-		Player p1 = new Player("Bob");
-		p1.setStatus(Status.BETTING);
-		List<Card> p1Cards = new ArrayList<>();
-		p1Cards.add(new Card(Rank.ACE, Suit.CLUB));
-		p1Cards.add(new Card(Rank.TWO, Suit.CLUB));
-		p1.addCards(p1Cards);
-		PlayerView p1v = new PlayerView(p1);
-		p1v.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			p1v.flipCards();
-		});
-		playerListView.getChildren().add(p1v);
+		switch (mode) {
+			case SINGLEPLAYER:
 
-		Player p2 = new Player("Joe", r.nextInt(5000));
-		p2.setStatus(Status.WAITING);
-		List<Card> p2Cards = new ArrayList<>();
-		p2Cards.add(new Card(Rank.ACE, Suit.CLUB));
-		p2Cards.add(new Card(Rank.ACE, Suit.CLUB));
-		p2.addCards(p2Cards);
-		playerListView.getChildren().add(new PlayerView(p2));
+		}
+        for (Player p: playerList) {
+            playerListView.getChildren().add(new PlayerView(p));
+        }
 
-		Player p3 = new Player("Tim", r.nextInt(5000));
-		p3.setStatus(Status.FOLDED);
-		p3.addCards(p2Cards);
-		playerListView.getChildren().add(new PlayerView(p3));
-
-		Player p4 = new Player("Sarah", r.nextInt(5000));
-		p4.setStatus(Status.WAITING);
-		p4.addCards(p2Cards);
-		playerListView.getChildren().add(new PlayerView(p4));
-
-		Player p5 = new Player("Billy", r.nextInt(5000));
-		p5.setStatus(Status.WAITING);
-		p5.addCards(p2Cards);
-		playerListView.getChildren().add(new PlayerView(p5));
-
-		Player p6 = new Player("Jewels", r.nextInt(5000));
-		p6.setStatus(Status.WAITING);
-		p6.addCards(p2Cards);
-		playerListView.getChildren().add(new PlayerView(p6));
-
-		Player p7 = new Player("Abby", r.nextInt(5000));
-		p7.setStatus(Status.WAITING);
-		p7.addCards(p2Cards);
-		playerListView.getChildren().add(new PlayerView(p7));
+        playerListView.getChildren().get(1).addEventHandler(MouseEvent.MOUSE_CLICKED, e -> ((PlayerView)playerListView.getChildren().get(1)).flipCards());
 
 		// BOARD CARDS
 		List<Card> boardCardArray = new ArrayList<>();
@@ -84,9 +57,7 @@ public class ControllerGame implements Initializable {
 
 		for (Card c: boardCardArray) {
 			CardImageView cv = c.getView(false);
-			cv.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-				cv.flip();
-			});
+			cv.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> cv.flip());
 			boardCards.getChildren().add(cv);
 		}
 
@@ -100,9 +71,7 @@ public class ControllerGame implements Initializable {
 
 		for (Card c: playerCardArray) {
 			CardImageView cv = c.getView(true);
-			cv.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-				cv.flip();
-			});
+			cv.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> cv.flip());
 			playerCards.getChildren().add(cv);
 		}
 	}

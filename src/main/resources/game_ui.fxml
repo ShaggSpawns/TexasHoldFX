@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.ButtonBar?>
-<BorderPane fx:controller="main.ControllerGame" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="main.controllers.ControllerGame" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <right>
         <VBox style="-fx-background-color: lightgray" fx:id="playerListView" alignment="BASELINE_CENTER" spacing="10" prefWidth="200.0">
             <Text text="Players">

@@ -7,22 +7,15 @@ public class Player {
 	List<Card> cards = new ArrayList<>();
 	private int money;
 	private String name;
-	private Status status;
+	private Status status = Status.WAITING;
 
 	public Player(String name) {
-		this(name, 1000, null, Status.WAITING);
+		this(name, 1000);
 	}
 
 	public Player(String name, int initMoney) {
-		this(name, initMoney, null, Status.WAITING);
-	}
-
-	public Player(String name, int initMoney, List<Card> initCards, Status status) {
 		setName(name);
 		setMoney(initMoney);
-		if (initCards != null)
-			addCards(initCards);
-		this.status = status;
 	}
 
 	private void setName(String name) {
