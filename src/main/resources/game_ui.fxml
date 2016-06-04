@@ -9,7 +9,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <BorderPane fx:controller="main.controllers.ControllerGame" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <right>
-        <VBox style="-fx-background-color: lightgray" fx:id="playerListView" alignment="BASELINE_CENTER" spacing="10" prefWidth="200.0">
+        <VBox style="-fx-background-color: lightgray" fx:id="playerListView" alignment="BASELINE_CENTER" spacing="10" prefWidth="200.0" onMouseClicked="#handleFlip">
             <Text text="Players">
                 <font>
                     <Font name="" style="BOLD" size="24.0" />
@@ -35,7 +35,7 @@
             <center>
                 <StackPane alignment="CENTER">
                     <Rectangle fill="papayawhip" stroke="black" width="465" height="150" arcWidth="25" arcHeight="25"/>
-                    <HBox fx:id="boardCards" alignment="CENTER" spacing="10" prefHeight="79"/>
+                    <HBox fx:id="boardCardView" alignment="CENTER" spacing="10" prefHeight="79"/>
                 </StackPane>
             </center>
             <bottom>
@@ -60,9 +60,8 @@
                     </right>
                     <center>
                         <StackPane alignment="CENTER" translateX="87">
-
                             <Rectangle fill="papayawhip" stroke="black" width="200" height="150" arcWidth="25" arcHeight="25"/>
-                            <HBox alignment="CENTER" fx:id="playerCards" spacing="10" prefHeight="79"/>
+                            <HBox alignment="CENTER" fx:id="playerCards" spacing="10" prefHeight="79" onMouseClicked="#handleFlip"/>
                         </StackPane>
                     </center>
                 </BorderPane>

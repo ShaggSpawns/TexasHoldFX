@@ -18,9 +18,18 @@ public class Deck {
 	}
 
 	public Card drawCard() {
-		if (size == 0)
+		if (size == 0) {
+			System.out.println("Out of cards, shuffling");
 			shuffle();
+		}
 		return cards.get(--size);
+	}
+
+	public List<Card> drawCards(int numCards) {
+		List<Card> cards = new ArrayList<>();
+		for (int i = 0; i < numCards; i++)
+			cards.add(drawCard());
+		return cards;
 	}
 
 	private void shuffle() {

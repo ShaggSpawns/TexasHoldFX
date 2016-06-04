@@ -48,7 +48,7 @@ public class PlayerView extends StackPane {
 
 		cardViews = new HBox(3);
 		for (Card c: player.getCards())
-			cardViews.getChildren().add(new CardImageView(c, .52, false, .6));
+			cardViews.getChildren().add(new CardImageView(c, .52, true, .6));
 
 		StackPane statusPane = new StackPane();
 		statusBackground = new Rectangle(65, 20);
