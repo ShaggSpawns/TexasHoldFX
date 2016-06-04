@@ -8,6 +8,7 @@ public class Player {
 	private int money;
 	private String name;
 	private Status status = Status.WAITING;
+    private boolean isButton;
 
 	public Player(String name) {
 		this(name, 1000);
@@ -76,6 +77,14 @@ public class Player {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+
+    public void setIsButton(boolean isButton) {
+        this.isButton = isButton;
+    }
+
+    public boolean isButton() {
+        return isButton;
+    }
 
 	public String toString() {
 		return name + " [$" + money + "]";

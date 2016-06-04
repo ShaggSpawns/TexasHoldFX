@@ -1,5 +1,7 @@
 package game;
 
+import javafx.fxml.FXMLLoader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,27 +9,46 @@ public class Game {
     private List<Player> players;
     private Deck deck = new Deck();
     private Board board;
+    private static int currentButtonIndex = -1;
 
-    public Game(Player player, int numAI) {
-        List<Player> players = new ArrayList<>();
-
-        players.add(player);
-        for (int i = 0; i < numAI; i++) {
-            players.add(new PlayerAI(1000));
-        }
-
-        setPlayers(players);
-        startGame();
+    public Game(Player localPlayer, int numAI) {
+        this(localPlayer, null, numAI);
     }
 
-    public Game(List<Player> players) {
-        setPlayers(players);
+    public Game(Player localPlayer, List<Player> remotePlayers) {
+        this(localPlayer, remotePlayers, 0);
+    }
+
+    public Game(Player localPlayer, List<Player> remotePlayers, int numAI) {
+        if (remotePlayers == null) {
+            if (numAI > 7 || numAI < 1)
+                throw new IllegalArgumentException("Invalid number of other players");
+        } else if (remotePlayers.size() + numAI > 7 || remotePlayers.size() + numAI < 1) {
+            throw new IllegalArgumentException("Invalid number of other players.");
+        }
+        players = new ArrayList<>();
+        players.add(localPlayer);
+        if (remotePlayers != null)
+            players.addAll(remotePlayers);
+
+        for (int i = 0; i < numAI; i++)
+            players.add(new PlayerAI());
         startGame();
     }
 
     private void startGame() {
+        setButtonDealer();
         dealCards();
         board = new Board(deck.drawCards(5));
+        showCard(4);
+    }
+
+    private void setButtonDealer() {
+        if (currentButtonIndex == -1)
+            currentButtonIndex = (int)(Math.random() * (players.size() - 1));
+        else if (currentButtonIndex == players.size())
+            currentButtonIndex = 1;
+        players.get(currentButtonIndex++).setIsButton(true);
     }
 
     private void dealCards() {
@@ -35,10 +56,8 @@ public class Game {
             p.addCards(deck.drawCards(2));
     }
 
-    private void setPlayers(List<Player> players) {
-        if (players.size() > 8 || players.size() < 2)
-            throw new IllegalArgumentException("Player overflow");
-        this.players = players;
+    private void showCard(int cardIndex) {
+
     }
 
     public List<Player> getPlayers() {

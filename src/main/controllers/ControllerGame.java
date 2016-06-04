@@ -3,15 +3,20 @@ package main.controllers;
 import game.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import main.runners.TexasHoldFX;
 import resource.CardImageView;
 import resource.PlayerView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,6 +35,9 @@ public class ControllerGame implements Initializable {
 	Button raiseBtn;
 	@FXML
 	Button foldBtn;
+
+    @FXML
+    Text optionBtn;
 
 	private List<Player> playerList = TexasHoldFX.game.getPlayers();
 	private List<Card> boardCards = TexasHoldFX.game.getBoard().getCards();
@@ -52,11 +60,9 @@ public class ControllerGame implements Initializable {
 			});
 		});
 
-		for (Card c: boardCards) {
-			CardImageView cv = c.getView(true);
-			cv.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> cv.flip());
-			boardCardView.getChildren().add(cv);
-		}
+		for (Card c: boardCards)
+			boardCardView.getChildren().add(c.getView(true));
+
 
 		for (Card c: TexasHoldFX.game.getPlayer(0).getCards())
 			playerCards.getChildren().add(c.getView(true));
@@ -65,13 +71,24 @@ public class ControllerGame implements Initializable {
 	@FXML
 	private void handleButton(ActionEvent event) {
 		if (event.getSource().equals(callBtn)) {
-
+            ((PlayerView)playerListView.getChildren().get(3)).changeButtonIndicator(true);
 		} else if (event.getSource().equals(raiseBtn)) {
 
 		} else if (event.getSource().equals(foldBtn)) {
 
 		}
 	}
+
+    @FXML
+    private void handleOptionBtn() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../resources/main_menu_ui.fxml"));
+            Scene scene = new Scene(root, TexasHoldFX.WIDTH, TexasHoldFX.HEIGHT);
+            TexasHoldFX.getStage().setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	@FXML
 	private void handleFlip(MouseEvent event) {
@@ -82,4 +99,8 @@ public class ControllerGame implements Initializable {
 			});
 		}
 	}
+
+    public void flipBoardCard(int cardIndex) {
+        ((CardImageView)(boardCardView.getChildren().get(cardIndex))).flip();
+    }
 }

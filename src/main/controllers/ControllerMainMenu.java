@@ -86,31 +86,22 @@ public class ControllerMainMenu implements Initializable {
     private void launchGame(GameMode gameMode) throws IOException {
         switch (gameMode) {
             case SINGLEPLAYER:
-                TexasHoldFX.game = new Game(new Player("Jackson"), 5);
+                TexasHoldFX.game = new Game(new Player("Jackson"), 7);
                 break;
             case MULTIPLAYER:
-                TexasHoldFX.game = new Game(getPlayers(5));
+                TexasHoldFX.game = new Game(new Player("Jackson"), getPlayers(3), 2);
                 break;
         }
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/game_ui.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        Parent root = loader.load(getClass().getResource("../resources/game_ui.fxml"));
         Scene scene = new Scene(root, TexasHoldFX.WIDTH, TexasHoldFX.HEIGHT);
         TexasHoldFX.getStage().setScene(scene);
     }
 
-    private List<Player> getPlayers(int num) {
+    private List<Player> getPlayers(int numPlayers) {
         List<Player> players = new ArrayList<>();
-        Random r = new Random(2);
-
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card(Rank.ACE, Suit.CLUB));
-        cards.add(new Card(Rank.TWO, Suit.CLUB));
-
-        for (int i = 0; i < num; i++) {
-            Player p = new Player("Bob");
-            p.addCards(cards);
-            players.add(p);
-        }
-
+        for (int i = 0; i < numPlayers; i++)
+            players.add(new PlayerAI(true));
         return players;
     }
 

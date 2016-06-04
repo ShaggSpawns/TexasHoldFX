@@ -5,28 +5,33 @@ import game.Player;
 import game.Status;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.util.Stack;
+
 public class PlayerView extends StackPane {
 	private Player player;
 	private HBox cardViews;
 	private Rectangle statusBackground;
+    private Rectangle backgroundEdge;
 	private Text statusText;
 
 	public PlayerView(Player player) {
 		this.player = player;
 		setAlignment(Pos.CENTER);
-		Rectangle backgroundEdge = new Rectangle(191, 71);
+		backgroundEdge = new Rectangle(191, 71);
 		backgroundEdge.setArcWidth(10);
 		backgroundEdge.setArcHeight(10);
-		backgroundEdge.setFill(Color.CADETBLUE);
+        changeButtonIndicator(player.isButton());
 		getChildren().add(backgroundEdge);
 
 		Rectangle background = new Rectangle(185,66);
@@ -92,6 +97,14 @@ public class PlayerView extends StackPane {
 		}
 		statusText.setText(status.name());
 	}
+
+    public void changeButtonIndicator(boolean isButton) {
+        if (isButton)
+            backgroundEdge.setFill(Color.GREENYELLOW);
+        else
+            backgroundEdge.setFill(Color.CADETBLUE);
+    }
+
 	public Player getPlayer() {
 		return player;
 	}

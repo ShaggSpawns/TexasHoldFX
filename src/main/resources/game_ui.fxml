@@ -25,7 +25,7 @@
                     <padding>
                         <Insets bottom="0.0" left="0.0" right ="0.0" top="40.0"/>
                     </padding>
-                    <Text  text="Pot: $" onMouseClicked="#handleButton">
+                    <Text  text="Pot: $83,230" onMouseClicked="#handleOptionBtn">
                         <font>
                             <Font name="" style="ITALIC" size="62"/>
                         </font>
@@ -50,11 +50,12 @@
                                 <Text text="MONEY"/>
                                 <ButtonBar translateX="-27" prefWidth="360">
                                     <buttons>
-                                        <Button text="Call" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
-                                        <Button text="Raise" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
-                                        <Button text="Fold" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
+                                        <Button fx:id="callBtn" text="Call" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
+                                        <Button fx:id="raiseBtn" text="Raise" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
+                                        <Button fx:id="foldBtn" text="Fold" prefWidth="50" prefHeight="70" onAction="#handleButton" focusTraversable="false"/>
                                     </buttons>
                                 </ButtonBar>
+                                <Text text="options" onMouseClicked="#handleOptionBtn"/>
                             </VBox>
                         </StackPane>
                     </right>
